@@ -1,8 +1,5 @@
 package kr.ac.kopo.board.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -10,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString
+@ToString(exclude = "board")
 public class Reply extends BaseEntity {
 
     @Id
@@ -18,8 +15,8 @@ public class Reply extends BaseEntity {
     private Long rno;
 
     private String text;
-
     private String replyer;
 
-
+    @ManyToOne
+    private Member board; // Foreign Key 설정(참조무결성 유지) , board_"primary key name"이 아니다. board 만 해도 자동적으로 참조 관계로 된다.
 }
